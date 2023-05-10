@@ -6,9 +6,7 @@ app.listen(PORT, console.log(`Server started on port ${PORT}`));
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
-
-
-const database = {
+const verifiedUsers = {
     "101" : "Sammam Sohail",
     "102" : "Mohib Rehman",
     "103" : "Midhat",
@@ -26,8 +24,8 @@ app.get("/start", async (req, res) => {
 app.post("/login/:id", async (req, res) => {
 	const id = req.params.id
     
-    if (id in database){
-        const person = database[id]
+    if (id in verifiedUsers){
+        const person = verifiedUsers[id]
         res.status(200).send(`Welcome ${person}`)
     }
     else{
