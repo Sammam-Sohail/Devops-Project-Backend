@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 8080;
 app.listen(PORT, console.log(`Server started on port ${PORT}`));
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
-app.use(cors());
+app.use(cors({origin: "*",}));
 
 // CI pipeline 
 
