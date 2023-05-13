@@ -9,29 +9,25 @@ app.use(express.json())
 // CI pipeline 
 
 const verifiedUsers = {
-    "101" : "Sammam Sohail",
-    "102" : "Mohib Rehman",
-    "103" : "Midhat",
-    "104" : "Mohib Tariq",
+    "sammamsohail" : "sammam12345",
+    "mohibrehman" : "mohib12345",
+    "midhatkarim" : "midhat12345",
+    "mohibtariq" : "mohib12345",
 }
 
 
 app.get("/start", async (req, res) => {
 	let { message } = req.body
 
-
     res.send("All Connections Established!!")
 })
 
 app.post("/login/:id", async (req, res) => {
 	const id = req.params.id
+    const password = req.body.password
     
-    if (id in verifiedUsers){
-        const person = verifiedUsers[id]
-        res.status(200).send(`Welcome ${person}`)
-    }
-    else{
-        res.status(404).send("Invalid id")
-    } 
+    id in verifiedUsers ? 
+        password === verifiedUsers[id] ?  res.status(200).send(`Welcome ${id}`) : res.status(400).send("Invalid password") 
+        : res.status(404).send("User not found")
 
 })
